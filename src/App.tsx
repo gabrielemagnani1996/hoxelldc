@@ -392,7 +392,7 @@ export default function App() {
             marginBottom: 24,
           }}
         >
-          <h1>Hoxell Import Tool</h1>
+          <h1>Hoxell Data Collect</h1>
 
           <p>Carica il Data Collect Excel.</p>
 
