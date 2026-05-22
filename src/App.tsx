@@ -1,8 +1,6 @@
 import React, { useMemo, useState } from "react";
 import * as XLSX from "xlsx";
 import { Upload, FileSpreadsheet, Copy, Download, AlertTriangle, CheckCircle2 } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 const PIPE = "||";
 const NL = String.fromCharCode(10);
