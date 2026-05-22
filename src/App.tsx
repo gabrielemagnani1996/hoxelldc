@@ -141,28 +141,32 @@ const SECTIONS: SectionConfig[] = [
     build: (r) => [r.category],
   },
   {
-    id: "faults",
-    label: "Maintenance Faults / Guasti per Categoria",
-    sourceSheet: "Guasti",
-    header: "category||name||severity||rooms||common_areas||zone_details",
-    start: 4,
-    cols: {
-      name: 1,
-      severity: 2,
-      category: 3,
-      rooms: 4,
-      commons: 5,
-      zone: 6,
-    },
-    build: (r) => [
-      r.category,
-      r.name,
-      severity(r.severity),
-      checked(r.rooms),
-      checked(r.commons),
-      r.zone,
-    ],
+  id: "faults",
+  label: "Maintenance Faults / Guasti per Categoria",
+  sourceSheet: "Guasti",
+  header: "category||severity",
+  start: 4,
+  cols: {
+    severity: 2,
+    category: 3,
+    rooms: 4,
+    commons: 5,
   },
+  build: (r) => {
+    const roomInfo = checked(r.rooms) === "1" ? "ROOMS" : "";
+    const commonInfo =
+      checked(r.commons) === "1" ? "COMMON AREAS" : "";
+
+    console.log(
+      `Categoria: ${r.category} | Rooms: ${roomInfo} | Common: ${commonInfo}`
+    );
+
+    return [
+      r.category,
+      severity(r.severity),
+    ];
+  },
+}
   {
     id: "users",
     label: "Users / Utenti",
