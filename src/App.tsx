@@ -166,7 +166,7 @@ const SECTIONS: SectionConfig[] = [
       severity(r.severity),
     ];
   },
-}
+},
   {
     id: "users",
     label: "Users / Utenti",
