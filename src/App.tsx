@@ -43,6 +43,29 @@ type SectionConfig = {
 
 const SECTIONS: SectionConfig[] = [
   {
+  id: "roomTypes",
+  label: "Room Types / Categorie Camere",
+  sourceSheet: "Categorie Camere",
+  header:
+    "name||pms_room_type_name||display_order||cleaning_time_empty||cleaning_time_arrival_or_departure||cleaning_time_in_house",
+  start: 4,
+  cols: {
+    code: 1,
+    name: 2,
+    empty: 3,
+    departure: 4,
+    inHouse: 5,
+  },
+  build: (r, i) => [
+    r.name,
+    r.code || r.name,
+    (i + 1) * 10,
+    r.empty,
+    r.departure,
+    r.inHouse,
+  ],
+},
+  {
     id: "rooms",
     label: "Rooms / Camere",
     sourceSheet: "Camere",
