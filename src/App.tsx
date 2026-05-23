@@ -592,11 +592,17 @@ export default function App() {
                 </div>
 
                <div
+<div
   style={{
-    background: "#020617",
-    borderRadius: 20,
-    padding: 20,
+    background: "#dbeafe",
+    borderRadius: 24,
+    padding: 24,
     marginTop: 20,
+    maxWidth: 1200,
+    marginLeft: "auto",
+    marginRight: "auto",
+    boxShadow: "0 4px 20px rgba(0,0,0,0.08)",
+    border: "1px solid #bfdbfe",
   }}
 >
   <div
@@ -626,7 +632,7 @@ export default function App() {
         padding: "8px 14px",
         borderRadius: 10,
         border: "none",
-        background: "#2563eb",
+        background: "#3b82f6",
         color: "white",
         cursor: "pointer",
         fontWeight: "bold",
@@ -644,11 +650,11 @@ export default function App() {
       height: 500,
       borderRadius: 12,
       padding: 18,
-      background: "#0f172a",
-      color: "#f8fafc",
+      background: "#eff6ff",",
+      color: "#0f172a",
       fontFamily: "monospace",
       fontSize: 14,
-      border: "1px solid #334155",
+      border: "1px solid #bfdbfe",
       resize: "vertical",
       lineHeight: 1.5,
     }}
