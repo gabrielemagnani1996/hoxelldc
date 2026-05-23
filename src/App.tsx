@@ -495,25 +495,66 @@ export default function App() {
                   </button>
                 </div>
 
-                <textarea
-                  value={sectionOutput(activeSection)}
-                  readOnly
-                  style={{
-                    width: "100%",
-                    height: 500,
-                    borderRadius: 16,
-                    padding: 16,
-                    background: "#020617",
-                    color: "white",
-                    fontFamily: "monospace",
-                    fontSize: 12,
-                  }}
-                />
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
+               <div
+  style={{
+    background: "#020617",
+    borderRadius: 20,
+    padding: 20,
+    marginTop: 20,
+  }}
+>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 16,
+    }}
+  >
+    <h3
+      style={{
+        color: "white",
+        margin: 0,
+      }}
+    >
+      Output Import
+    </h3>
+
+    <button
+      onClick={() =>
+        navigator.clipboard.writeText(
+          sectionOutput(activeSection)
+        )
+      }
+      style={{
+        padding: "8px 14px",
+        borderRadius: 10,
+        border: "none",
+        background: "#2563eb",
+        color: "white",
+        cursor: "pointer",
+        fontWeight: "bold",
+      }}
+    >
+      Copy
+    </button>
+  </div>
+
+  <textarea
+    value={sectionOutput(activeSection)}
+    readOnly
+    style={{
+      width: "100%",
+      height: 500,
+      borderRadius: 12,
+      padding: 18,
+      background: "#0f172a",
+      color: "#f8fafc",
+      fontFamily: "monospace",
+      fontSize: 14,
+      border: "1px solid #334155",
+      resize: "vertical",
+      lineHeight: 1.5,
+    }}
+  />
+</div>
