@@ -262,8 +262,7 @@ function shouldSkipRow(raw: any[], mapped: RowMapped): boolean {
   return Object.values(mapped)
     .map(clean)
     .every((v) => !v);
-}
-
+  }
 function parseSection(workbook: XLSX.WorkBook, config: SectionConfig) {
   const sheet = workbook.Sheets[config.sourceSheet];
 
@@ -316,54 +315,62 @@ function parseSection(workbook: XLSX.WorkBook, config: SectionConfig) {
     lines.push(line);
   }
 
-if (config.id === "faults") {
-  rows.sort((a, b) => a.line.localeCompare(b.line));
-  lines.splice(0, lines.length, ...rows.map((r) => r.line));
-}
-
-if (config.id === "rooms") {
-  const grouped: Record<string, string[]> = {};
-
-  for (let i = config.start; i < rawRows.length; i++) {
-    const raw = rawRows[i];
-
-    const name = clean(raw[1]);
-    const roomType = clean(raw[2]);
-    const section = clean(raw[4]);
-    const empty = clean(raw[5]);
-    const departure = clean(raw[6]);
-    const inHouse = clean(raw[7]);
-
-    if (!name && !roomType && !section) continue;
-
-    const groupName = `${roomType || "NO ROOM TYPE"} - ${section || "NO SECTION"}`;
-
-    const line = [
-      name,
-      name,
-      name || i + 1,
-      empty,
-      departure,
-      inHouse,
-    ].join(PIPE);
-
-    if (!grouped[groupName]) grouped[groupName] = [];
-    grouped[groupName].push(line);
+  if (config.id === "faults") {
+    rows.sort((a, b) => a.line.localeCompare(b.line));
+    lines.splice(0, lines.length, ...rows.map((r) => r.line));
   }
 
-  const groupedLines: string[] = [];
+  if (config.id === "rooms") {
+    const grouped: Record<string, string[]> = {};
 
-  Object.keys(grouped)
-    .sort()
-    .forEach((groupName) => {
-      groupedLines.push(`### ${groupName}`);
-      groupedLines.push(...grouped[groupName]);
-      groupedLines.push("");
-    });
+    for (let i = config.start; i < rawRows.length; i++) {
+      const raw = rawRows[i];
 
-  lines.splice(0, lines.length, ...groupedLines);
-}
-  
+      const name = clean(raw[1]);
+      const roomType = clean(raw[2]);
+      const section = clean(raw[4]);
+      const empty = clean(raw[5]);
+      const departure = clean(raw[6]);
+      const inHouse = clean(raw[7]);
+
+      if (!name && !roomType && !section) continue;
+
+      const groupName =
+        `${roomType || "NO ROOM TYPE"} - ${section || "NO SECTION"}`;
+
+      const line = [
+        name,
+        name,
+        name,
+        empty,
+        departure,
+        inHouse,
+      ].join(PIPE);
+
+      if (!grouped[groupName]) grouped[groupName] = [];
+
+      grouped[groupName].push(line);
+    }
+
+    const groupedLines: string[] = [];
+
+    Object.keys(grouped)
+      .sort()
+      .forEach((groupName) => {
+        groupedLines.push(`### ${groupName}`);
+        groupedLines.push(...grouped[groupName]);
+        groupedLines.push("");
+      });
+
+    lines.splice(0, lines.length, ...groupedLines);
+    rows.splice(
+      0,
+      rows.length,
+      ...groupedLines.map((line, index) => ({
+        sourceRow: index + 1,
+        line,
+      }))
+    );
   }
 
   return {
