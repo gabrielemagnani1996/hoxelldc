@@ -649,7 +649,7 @@ export default function App() {
       height: 500,
       borderRadius: 12,
       padding: 18,
-      background: "#eff6ff",",
+      background: "#eff6ff",
       color: "#0f172a",
       fontFamily: "monospace",
       fontSize: 14,
