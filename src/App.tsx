@@ -66,27 +66,29 @@ const SECTIONS: SectionConfig[] = [
   ],
 },
   {
-    id: "rooms",
-    label: "Rooms / Camere",
-    sourceSheet: "Camere",
-    header:
-      "name||pms_room_name||display_order||cleaning_time_empty||cleaning_time_arrival_or_departure||cleaning_time_in_house",
-    start: 3,
-    cols: {
-      name: 1,
-      empty: 5,
-      departure: 6,
-      inHouse: 7,
-    },
-    build: (r, i) => [
-      r.name,
-      r.name,
-      r.name || i + 1,
-      r.empty,
-      r.departure,
-      r.inHouse,
-    ],
+  id: "rooms",
+  label: "Rooms / Camere divise per Room Type e Section",
+  sourceSheet: "Camere",
+  header:
+    "name||pms_room_name||display_order||cleaning_time_empty||cleaning_time_arrival_or_departure||cleaning_time_in_house",
+  start: 3,
+  cols: {
+    name: 1,
+    roomType: 2,
+    section: 4,
+    empty: 5,
+    departure: 6,
+    inHouse: 7,
   },
+  build: (r, i) => [
+    r.name,
+    r.name,
+    r.name || i + 1,
+    r.empty,
+    r.departure,
+    r.inHouse,
+  ],
+},
   {
     id: "roomSections",
     label: "Room Sections / Sezioni Camere",
@@ -314,9 +316,54 @@ function parseSection(workbook: XLSX.WorkBook, config: SectionConfig) {
     lines.push(line);
   }
 
-  if (config.id === "faults") {
-    rows.sort((a, b) => a.line.localeCompare(b.line));
-    lines.splice(0, lines.length, ...rows.map((r) => r.line));
+if (config.id === "faults") {
+  rows.sort((a, b) => a.line.localeCompare(b.line));
+  lines.splice(0, lines.length, ...rows.map((r) => r.line));
+}
+
+if (config.id === "rooms") {
+  const grouped: Record<string, string[]> = {};
+
+  for (let i = config.start; i < rawRows.length; i++) {
+    const raw = rawRows[i];
+
+    const name = clean(raw[1]);
+    const roomType = clean(raw[2]);
+    const section = clean(raw[4]);
+    const empty = clean(raw[5]);
+    const departure = clean(raw[6]);
+    const inHouse = clean(raw[7]);
+
+    if (!name && !roomType && !section) continue;
+
+    const groupName = `${roomType || "NO ROOM TYPE"} - ${section || "NO SECTION"}`;
+
+    const line = [
+      name,
+      name,
+      name || i + 1,
+      empty,
+      departure,
+      inHouse,
+    ].join(PIPE);
+
+    if (!grouped[groupName]) grouped[groupName] = [];
+    grouped[groupName].push(line);
+  }
+
+  const groupedLines: string[] = [];
+
+  Object.keys(grouped)
+    .sort()
+    .forEach((groupName) => {
+      groupedLines.push(`### ${groupName}`);
+      groupedLines.push(...grouped[groupName]);
+      groupedLines.push("");
+    });
+
+  lines.splice(0, lines.length, ...groupedLines);
+}
+  
   }
 
   return {
