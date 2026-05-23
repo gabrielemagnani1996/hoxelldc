@@ -453,18 +453,19 @@ export default function App() {
             marginBottom: 24,
           }}
         >
-      <div
+  <div
   style={{
     display: "flex",
     alignItems: "center",
-    gap: 16,
+    gap: 20,
+    marginBottom: 10,
   }}
 >
   <img
     src="/logo.png"
     alt="Hoxell"
     style={{
-      height: 60,
+      height: 90,
       objectFit: "contain",
     }}
   />
@@ -473,19 +474,24 @@ export default function App() {
     <h1
       style={{
         margin: 0,
-        fontSize: 32,
+        fontSize: 42,
+        lineHeight: 1,
+        color: "#0f172a",
       }}
     >
-      Hoxell Data Collect
+      Data Collect
     </h1>
 
     <p
       style={{
-        margin: 0,
+        marginTop: 8,
+        marginBottom: 0,
+        fontSize: 18,
         color: "#64748b",
+        fontWeight: 500,
       }}
     >
-      Import Converter Tool
+      Hoxell Import Converter
     </p>
   </div>
 </div>
