@@ -96,28 +96,6 @@ const SECTIONS: SectionConfig[] = [
     ],
   },
   {
-    id: "extraItems",
-    label: "Extra Items / Extra",
-    sourceSheet: "Extra",
-    header: "name||category||cost||price||room_type_code||display_order",
-    start: 4,
-    cols: {
-      name: 1,
-      category: 2,
-      cost: 3,
-      price: 4,
-      roomType: 5,
-    },
-    build: (r, i) => [
-      r.name,
-      r.category,
-      r.cost,
-      r.price,
-      r.roomType,
-      (i + 1) * 10,
-    ],
-  },
-  {
     id: "lostFound",
     label: "Lost & Found",
     sourceSheet: "Lost & Found",
