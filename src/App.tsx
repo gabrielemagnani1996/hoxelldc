@@ -453,9 +453,44 @@ export default function App() {
             marginBottom: 24,
           }}
         >
-          <h1>Hoxell Data Collect</h1>
+      <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: 16,
+  }}
+>
+  <img
+    src="/logo.png"
+    alt="Hoxell"
+    style={{
+      height: 60,
+      objectFit: "contain",
+    }}
+  />
 
-          <p>Carica il Data Collect Excel.</p>
+  <div>
+    <h1
+      style={{
+        margin: 0,
+        fontSize: 32,
+      }}
+    >
+      Hoxell Data Collect
+    </h1>
+
+    <p
+      style={{
+        margin: 0,
+        color: "#64748b",
+      }}
+    >
+      Import Converter Tool
+    </p>
+  </div>
+</div>
+
+<p>Carica il Data Collect Excel.</p>
 
           <input
             type="file"
