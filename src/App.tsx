@@ -144,9 +144,10 @@ const SECTIONS: SectionConfig[] = [
   id: "faults",
   label: "Maintenance Faults / Guasti per Categoria",
   sourceSheet: "Guasti",
-  header: "category||severity",
+  header: "category||name||severity",
   start: 4,
   cols: {
+    name: 1,
     severity: 2,
     category: 3,
     rooms: 4,
@@ -158,11 +159,12 @@ const SECTIONS: SectionConfig[] = [
       checked(r.commons) === "1" ? "COMMON AREAS" : "";
 
     console.log(
-      `Categoria: ${r.category} | Rooms: ${roomInfo} | Common: ${commonInfo}`
+      `Categoria: ${r.category} | Guasto: ${r.name} | Rooms: ${roomInfo} | Common: ${commonInfo}`
     );
 
     return [
       r.category,
+      r.name,
       severity(r.severity),
     ];
   },
