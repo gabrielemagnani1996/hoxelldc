@@ -454,46 +454,39 @@ export default function App() {
           }}
         >
   <div
+  <div
   style={{
-    display: "flex",
-    alignItems: "center",
-    gap: 20,
-    marginBottom: 10,
+    textAlign: "center",
+    marginBottom: 40,
+    marginTop: 10,
   }}
 >
-  <img
-    src="/logo.png"
-    alt="Hoxell"
+  <h1
     style={{
-      height: 90,
-      objectFit: "contain",
+      margin: 0,
+      fontSize: 56,
+      fontWeight: 800,
+      letterSpacing: "-2px",
+      color: "#0f172a",
+      fontFamily:
+        "'Inter', 'Segoe UI', sans-serif",
     }}
-  />
+  >
+    Hoxell Data Collect
+  </h1>
 
-  <div>
-    <h1
-      style={{
-        margin: 0,
-        fontSize: 42,
-        lineHeight: 1,
-        color: "#0f172a",
-      }}
-    >
-      Data Collect
-    </h1>
-
-    <p
-      style={{
-        marginTop: 8,
-        marginBottom: 0,
-        fontSize: 18,
-        color: "#64748b",
-        fontWeight: 500,
-      }}
-    >
-      Hoxell Import Converter
-    </p>
-  </div>
+  <p
+    style={{
+      marginTop: 12,
+      fontSize: 20,
+      color: "#64748b",
+      fontWeight: 500,
+      fontFamily:
+        "'Inter', 'Segoe UI', sans-serif",
+    }}
+  >
+    Import Converter Tool
+  </p>
 </div>
 
 <p>Carica il Data Collect Excel.</p>
