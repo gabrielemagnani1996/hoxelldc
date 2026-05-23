@@ -539,7 +539,7 @@ export default function App() {
       Copy
     </button>
   </div>
-
+          
   <textarea
     value={sectionOutput(activeSection)}
     readOnly
@@ -558,3 +558,11 @@ export default function App() {
     }}
   />
 </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
