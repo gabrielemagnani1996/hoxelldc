@@ -143,11 +143,11 @@ const SECTIONS: SectionConfig[] = [
     unique: true,
     build: (r) => [r.category],
   },
-  {
+{
   id: "faults",
-  label: "Maintenance Faults / Guasti per Categoria",
+  label: "Maintenance Faults / Guasti ordinati per Categoria",
   sourceSheet: "Guasti",
-  header: "category||name||severity",
+  header: "name||severity",
   start: 4,
   cols: {
     name: 1,
@@ -166,7 +166,6 @@ const SECTIONS: SectionConfig[] = [
     );
 
     return [
-      r.category,
       r.name,
       severity(r.severity),
     ];
