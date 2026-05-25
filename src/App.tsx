@@ -297,7 +297,6 @@ function parseSection(workbook: XLSX.WorkBook, config: SectionConfig) {
       line,
     });
 
-    lines.push(line);
   }
 
   if (config.id === "faults") {
