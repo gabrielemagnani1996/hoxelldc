@@ -187,19 +187,6 @@ const SECTIONS: SectionConfig[] = [
       depId(r.department),
     ],
   },
-  {
-    id: "buildingAutomation",
-    label: "Building Automation",
-    sourceSheet: "Building Automation",
-    header: "supplier_name||type||contact_details",
-    start: 3,
-    cols: {
-      supplier: 1,
-      type: 2,
-      contact: 3,
-    },
-    build: (r) => [r.supplier, r.type, r.contact],
-  },
 ];
 
 function clean(value: any): string {
