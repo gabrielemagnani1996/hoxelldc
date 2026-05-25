@@ -315,9 +315,50 @@ function parseSection(workbook: XLSX.WorkBook, config: SectionConfig) {
   }
 
   if (config.id === "faults") {
-    rows.sort((a, b) => a.line.localeCompare(b.line));
-    lines.splice(0, lines.length, ...rows.map((r) => r.line));
+  const grouped: Record<string, string[]> = {};
+
+  for (let i = config.start; i < rawRows.length; i++) {
+    const raw = rawRows[i];
+
+    const name = clean(raw[1]);
+    const severityValue = severity(raw[2]);
+    const category = clean(raw[3]);
+
+    if (!name && !severityValue && !category) continue;
+
+    const groupName = category || "NO CATEGORY";
+
+    const line = [
+      name,
+      severityValue,
+    ].join(PIPE);
+
+    if (!grouped[groupName]) grouped[groupName] = [];
+
+    grouped[groupName].push(line);
   }
+
+  const groupedLines: string[] = [];
+
+  Object.keys(grouped)
+    .sort()
+    .forEach((groupName) => {
+      groupedLines.push(`### ${groupName}`);
+      groupedLines.push(...grouped[groupName]);
+      groupedLines.push("");
+    });
+
+  lines.splice(0, lines.length, ...groupedLines);
+
+  rows.splice(
+    0,
+    rows.length,
+    ...groupedLines.map((line, index) => ({
+      sourceRow: index + 1,
+      line,
+    }))
+  );
+}
 
   if (config.id === "rooms") {
     const grouped: Record<string, string[]> = {};
