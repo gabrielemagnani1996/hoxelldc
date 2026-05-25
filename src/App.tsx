@@ -588,25 +588,6 @@ export default function App() {
                   }}
                 >
                   <h2>{activeSection.label}</h2>
-
-                  <button
-                    onClick={() =>
-                      downloadText(
-                        `${activeSection.id}.txt`,
-                        sectionOutput(activeSection)
-                      )
-                    }
-                    style={{
-                      padding: "10px 14px",
-                      borderRadius: 12,
-                      border: "none",
-                      background: "#0f172a",
-                      color: "white",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Download TXT
-                  </button>
                 </div>
 
 <div
