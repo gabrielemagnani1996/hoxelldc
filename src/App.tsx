@@ -39,6 +39,7 @@ type SectionConfig = {
   cols: Record<string, number>;
   unique?: boolean;
   build: (r: RowMapped, i: number, raw: any[]) => any[];
+  skipRows?: number[];
 };
 
 const SECTIONS: SectionConfig[] = [
@@ -48,6 +49,7 @@ const SECTIONS: SectionConfig[] = [
   sourceSheet: "Categorie Camere",
   header: "name||description",
   start: 4,
+   skipRows: [4, 5],
   cols: {
     pmsName: 1,
     description: 2,
@@ -64,6 +66,7 @@ const SECTIONS: SectionConfig[] = [
   header:
     "name||pms_room_name||display_order||cleaning_time_empty||cleaning_time_arrival_or_departure||cleaning_time_in_house",
   start: 3,
+    skipRows: [3, 4, 5],
   cols: {
     name: 1,
     roomType: 2,
@@ -100,6 +103,7 @@ const SECTIONS: SectionConfig[] = [
     header:
       "name||pms_room_name||display_order||cleaning_time_empty||cleaning_time_arrival_or_departure||cleaning_time_in_house",
     start: 3,
+    skipRows: [3, 4, 5, 6, 7, 8],
     cols: {
       name: 1,
     },
@@ -118,6 +122,7 @@ const SECTIONS: SectionConfig[] = [
     sourceSheet: "Lost & Found",
     header: "storage_area",
     start: 3,
+    skipRows: [3, 4, 5],
     cols: {
       name: 1,
     },
@@ -141,6 +146,7 @@ const SECTIONS: SectionConfig[] = [
   sourceSheet: "Guasti",
   header: "name||severity",
   start: 4,
+  skipRows: [4, 5, 6, 7, 8, 9],
   cols: {
     name: 1,
     severity: 2,
@@ -264,7 +270,7 @@ function parseSection(workbook: XLSX.WorkBook, config: SectionConfig) {
   const seen = new Set<string>();
 
   for (let i = config.start; i < rawRows.length; i++) {
-      if ([3, 4, 5].includes(i)) continue;
+      if (config.skipRows?.includes(i)) continue;
     const raw = rawRows[i];
     const mapped: RowMapped = {};
 
