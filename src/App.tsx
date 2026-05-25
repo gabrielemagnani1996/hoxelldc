@@ -622,9 +622,12 @@ export default function App() {
 
     <button
       onClick={() =>
-        navigator.clipboard.writeText(
-          sectionOutput(activeSection)
-        )
+      const text = sectionOutput(activeSection)
+  .split("\n")
+  .slice(1)
+  .join("\n");
+
+navigator.clipboard.writeText(text);
       }
       style={{
         padding: "8px 14px",
