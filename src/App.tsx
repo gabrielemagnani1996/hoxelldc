@@ -621,13 +621,14 @@ export default function App() {
     </h3>
 
     <button
-      onClick={() =>
-      const text = sectionOutput(activeSection)
-  .split("\n")
-  .slice(1)
-  .join("\n");
+     onClick={() => {
+  const text = sectionOutput(activeSection)
+    .split("\n")
+    .slice(1)
+    .join("\n");
 
-navigator.clipboard.writeText(text);
+  navigator.clipboard.writeText(text);
+}}
       }
       style={{
         padding: "8px 14px",
