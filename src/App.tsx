@@ -264,6 +264,7 @@ function parseSection(workbook: XLSX.WorkBook, config: SectionConfig) {
   const seen = new Set<string>();
 
   for (let i = config.start; i < rawRows.length; i++) {
+      if ([3, 4, 5].includes(i)) continue;
     const raw = rawRows[i];
     const mapped: RowMapped = {};
 
