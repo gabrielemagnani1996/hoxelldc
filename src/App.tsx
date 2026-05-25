@@ -629,7 +629,6 @@ export default function App() {
 
   navigator.clipboard.writeText(text);
 }}
-      }
       style={{
         padding: "8px 14px",
         borderRadius: 10,
