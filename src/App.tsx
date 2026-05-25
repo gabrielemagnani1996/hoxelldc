@@ -454,7 +454,6 @@ export default function App() {
           }}
         >
   <div
-  <div
   style={{
     textAlign: "center",
     marginBottom: 40,
